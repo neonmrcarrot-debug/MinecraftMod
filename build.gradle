@@ -1,0 +1,72 @@
+plugins {
+    id 'fabric-loom' version '1.5-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+archivesBaseName = project.archives_base_name
+
+group = project.maven_group
+
+repositories {
+    maven { url = 'https://maven.fabricmc.net/' }
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+    dependsOn tasks.named('generateTextures')
+    inputs.property "version", project.version
+
+    filesMatching('fabric.mod.json') {
+        expand "version": project.version
+    }
+}
+
+def generatedResourcesDir = layout.buildDirectory.dir("generated/resources")
+
+sourceSets {
+    main {
+        resources {
+            srcDir generatedResourcesDir
+        }
+    }
+}
+
+tasks.register('generateTextures') {
+    description = 'Decodes base64 texture assets into PNG resources.'
+    inputs.dir("${projectDir}/src/main/resources_base64")
+    outputs.dir(generatedResourcesDir)
+
+    doLast {
+        def baseDir = file("${projectDir}/src/main/resources_base64")
+        def outputDir = generatedResourcesDir.get().asFile
+        if (!baseDir.exists()) {
+            return
+        }
+        baseDir.eachFileRecurse { file ->
+            if (file.isFile() && file.name.endsWith('.b64')) {
+                def relativePath = baseDir.toPath().relativize(file.toPath()).toString()
+                def outputPath = new File(outputDir, relativePath.replace('.b64', ''))
+                outputPath.parentFile.mkdirs()
+                outputPath.bytes = file.text.trim().decodeBase64()
+            }
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}

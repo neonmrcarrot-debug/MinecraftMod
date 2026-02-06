@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "spellcraft",
+  "version": "${version}",
+  "name": "Spellcraft",
+  "description": "Adds custom mobs, bosses, and spell staffs with rich textures.",
+  "authors": [
+    "OpenAI"
+  ],
+  "contact": {
+    "homepage": "https://example.com",
+    "sources": "https://example.com"
+  },
+  "license": "MIT",
+  "icon": "assets/spellcraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.example.spellcraft.SpellcraftMod"
+    ],
+    "client": [
+      "com.example.spellcraft.client.SpellcraftClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "fabric": "*",
+    "minecraft": "1.20.1"
+  }
+}

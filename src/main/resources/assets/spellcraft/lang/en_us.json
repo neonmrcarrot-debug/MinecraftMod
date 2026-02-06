@@ -1,0 +1,11 @@
+{
+  "item.spellcraft.flame_staff": "Flame Staff",
+  "item.spellcraft.frost_staff": "Frost Staff",
+  "item.spellcraft.storm_staff": "Storm Staff",
+  "item.spellcraft.emberling_spawn_egg": "Emberling Spawn Egg",
+  "item.spellcraft.glacier_wisp_spawn_egg": "Glacier Wisp Spawn Egg",
+  "item.spellcraft.arcane_warden_spawn_egg": "Arcane Warden Spawn Egg",
+  "entity.spellcraft.emberling": "Emberling",
+  "entity.spellcraft.glacier_wisp": "Glacier Wisp",
+  "entity.spellcraft.arcane_warden": "Arcane Warden"
+}

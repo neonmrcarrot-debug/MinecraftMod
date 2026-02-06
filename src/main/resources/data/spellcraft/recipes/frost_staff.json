@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " PI",
+    " SP",
+    "S  "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:packed_ice"
+    },
+    "I": {
+      "item": "minecraft:ice"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "spellcraft:frost_staff"
+  }
+}
